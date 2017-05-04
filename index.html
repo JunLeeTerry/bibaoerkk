@@ -5,26 +5,42 @@
         body {
             background-repeat: no-repeat;
             background-size: 100% 100%;
+            padding-left: 70px;
+            padding-right: 70px;
+            margin-top: 200px;
+        }
+        
+        .content-text {
+            color: coral;
+            font-size: 100px;
+            font-style: bold;
+            padding: 8px;
+        }
+        
+        .content-div {
+            background-color: rgba(255, 255, 255, 0.7);
         }
     </style>
 </head>
 
 <body>
     <div>
-        <p class="content-text">ID:</p>
-        <p class="content-text" id="id"></p>
-    </div>
-    <div>
-        <p class="content-text">大区:</p>
-        <p class="content-text" id="daqu"></p>
-    </div>
-    <div>
-        <p class="content-text">等级:</p>
-        <p class="content-text" id="dengji"></p>
-    </div>
-    <div>
-        <p class="content-text">斗技段位:</p>
-        <p class="content-text" id="duanwei"></p>
+        <div class="content-div">
+            <span class="content-text">ID:</span>
+            <span class="content-text" id="id"></span>
+        </div>
+        <div class="content-div">
+            <span class="content-text">大区:</span>
+            <span class="content-text" id="daqu"></span>
+        </div>
+        <div class="content-div">
+            <span class="content-text">等级:</span>
+            <span class="content-text" id="dengji"></span>
+        </div>
+        <div class="content-div">
+            <span class="content-text">斗技段位:</span>
+            <span class="content-text" id="duanwei"></span>
+        </div>
     </div>
     <script>
         (function () {
@@ -38,21 +54,24 @@
             console.log(page)
             document.body.style.backgroundImage = "url('images/image" + page + ".jpg')";
         }())
-        function getQueryParams(qs) {
-            qs = qs.split('+').join(' ');
-
-            var params = {},
-                tokens,
-                re = /[?&]?([^=]+)=([^&]*)/g;
-
-            while (tokens = re.exec(qs)) {
-                params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+        function getQueryString(name) {
+            var reg = new RegExp('(^|&)' + name + '=([^&]*)(&|$)', 'i');
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) {
+                return unescape(r[2]);
             }
-
-            return params;
+            return null;
         }
-        var test = getQueryParams("test");
-        console.log(test);
+        (function () {
+            var id = getQueryString("id");
+            var daqu = getQueryString("daqu");
+            var dengji = getQueryString("dengji");
+            var duanwei = getQueryString("duanwei");
+            document.getElementById("id").innerHTML = id;
+            document.getElementById("daqu").innerHTML = daqu;
+            document.getElementById("dengji").innerHTML = dengji;
+            document.getElementById("duanwei").innerHTML = duanwei;
+        }())
     </script>
 </body>
 
