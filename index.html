@@ -1,7 +1,59 @@
 <html>
-    <head>
-    </head>
-    <body>
-        <h1>Hello World!</h1>
-    </body>
+
+<head>
+    <style type="text/css">
+        body {
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <p class="content-text">ID:</p>
+        <p class="content-text" id="id"></p>
+    </div>
+    <div>
+        <p class="content-text">大区:</p>
+        <p class="content-text" id="daqu"></p>
+    </div>
+    <div>
+        <p class="content-text">等级:</p>
+        <p class="content-text" id="dengji"></p>
+    </div>
+    <div>
+        <p class="content-text">斗技段位:</p>
+        <p class="content-text" id="duanwei"></p>
+    </div>
+    <script>
+        (function () {
+            var random = Math.random();
+            var page = 1;
+            if (random <= 0.5) {
+                page = 1;
+            } else {
+                page = 2;
+            }
+            console.log(page)
+            document.body.style.backgroundImage = "url('images/image" + page + ".jpg')";
+        }())
+        function getQueryParams(qs) {
+            qs = qs.split('+').join(' ');
+
+            var params = {},
+                tokens,
+                re = /[?&]?([^=]+)=([^&]*)/g;
+
+            while (tokens = re.exec(qs)) {
+                params[decodeURIComponent(tokens[1])] = decodeURIComponent(tokens[2]);
+            }
+
+            return params;
+        }
+        var test = getQueryParams("test");
+        console.log(test);
+    </script>
+</body>
+
 </html>
